@@ -1,0 +1,275 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/tblobaum/git-rev">git-rev (v0.2.1)</a>
+</h1>
+<h4>get the current git commit hash, tag or branch in node</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.git-rev">module git-rev</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.git-rev.branch">
+            function <span class="apidocSignatureSpan">git-rev.</span>branch
+            <span class="apidocSignatureSpan">(cb)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.git-rev.log">
+            function <span class="apidocSignatureSpan">git-rev.</span>log
+            <span class="apidocSignatureSpan">(cb)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.git-rev.long">
+            function <span class="apidocSignatureSpan">git-rev.</span>long
+            <span class="apidocSignatureSpan">(cb)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.git-rev.short">
+            function <span class="apidocSignatureSpan">git-rev.</span>short
+            <span class="apidocSignatureSpan">(cb)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.git-rev.tag">
+            function <span class="apidocSignatureSpan">git-rev.</span>tag
+            <span class="apidocSignatureSpan">(cb)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.git-rev" id="apidoc.module.git-rev">module git-rev</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.git-rev.branch" id="apidoc.element.git-rev.branch">
+        function <span class="apidocSignatureSpan">git-rev.</span>branch
+        <span class="apidocSignatureSpan">(cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">branch = function (cb) {
+  _command('git rev-parse --abbrev-ref HEAD', cb)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+})
+
+git.long(function (str) {
+console.log('long', str)
+// =&gt; aefdd946ea65c88f8aa003e46474d57ed5b291d1
+})
+
+git.<span class="apidocCodeKeywordSpan">branch</span>(function (str) {
+console.log('branch', str)
+// =&gt; master
+})
+
+git.tag(function (str) {
+console.log('tag', str)
+// =&gt; 0.1.0
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.git-rev.log" id="apidoc.element.git-rev.log">
+        function <span class="apidocSignatureSpan">git-rev.</span>log
+        <span class="apidocSignatureSpan">(cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">log = function (cb) {
+  _command('git log --no-color --pretty=format:\'[ "%H", "%s", "%cr", "%an" ],\' --abbrev-commit', function (str) {
+    str = str.substr(0, str.length-1)
+    cb(JSON.parse('[' + str + ']'))
+  })
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+# Example
+
+``` js
+var git = require('git-rev')
+
+git.short(function (str) {
+  console.<span class="apidocCodeKeywordSpan">log</span>('short', str)
+  // =&gt; aefdd94
+})
+
+git.long(function (str) {
+  console.log('long', str)
+  // =&gt; aefdd946ea65c88f8aa003e46474d57ed5b291d1
+})
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.git-rev.long" id="apidoc.element.git-rev.long">
+        function <span class="apidocSignatureSpan">git-rev.</span>long
+        <span class="apidocSignatureSpan">(cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">long = function (cb) {
+  _command('git rev-parse HEAD', cb)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var git = require('git-rev')
+
+git.short(function (str) {
+console.log('short', str)
+// =&gt; aefdd94
+})
+
+git.<span class="apidocCodeKeywordSpan">long</span>(function (str) {
+console.log('long', str)
+// =&gt; aefdd946ea65c88f8aa003e46474d57ed5b291d1
+})
+
+git.branch(function (str) {
+console.log('branch', str)
+// =&gt; master
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.git-rev.short" id="apidoc.element.git-rev.short">
+        function <span class="apidocSignatureSpan">git-rev.</span>short
+        <span class="apidocSignatureSpan">(cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">short = function (cb) {
+  _command('git rev-parse --short HEAD', cb)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+access git revision state in node
+
+# Example
+
+``` js
+var git = require('git-rev')
+
+git.<span class="apidocCodeKeywordSpan">short</span>(function (str) {
+console.log('short', str)
+// =&gt; aefdd94
+})
+
+git.long(function (str) {
+console.log('long', str)
+// =&gt; aefdd946ea65c88f8aa003e46474d57ed5b291d1
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.git-rev.tag" id="apidoc.element.git-rev.tag">
+        function <span class="apidocSignatureSpan">git-rev.</span>tag
+        <span class="apidocSignatureSpan">(cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">tag = function (cb) {
+  _command('git describe --always --tag --abbrev=0', cb)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+})
+
+git.branch(function (str) {
+  console.log('branch', str)
+  // =&gt; master
+})
+
+git.<span class="apidocCodeKeywordSpan">tag</span>(function (str) {
+  console.log('tag', str)
+  // =&gt; 0.1.0
+})
+
+```
+
+# Methods
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
