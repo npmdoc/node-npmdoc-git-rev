@@ -1,6 +1,6 @@
 # npmdoc-git-rev
 
-#### api documentation for  [git-rev (v0.2.1)](https://github.com/tblobaum/git-rev)  [![npm package](https://img.shields.io/npm/v/npmdoc-git-rev.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-git-rev) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-git-rev.svg)](https://travis-ci.org/npmdoc/node-npmdoc-git-rev)
+#### basic api documentation for  [git-rev (v0.2.1)](https://github.com/tblobaum/git-rev)  [![npm package](https://img.shields.io/npm/v/npmdoc-git-rev.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-git-rev) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-git-rev.svg)](https://travis-ci.org/npmdoc/node-npmdoc-git-rev)
 
 #### get the current git commit hash, tag or branch in node
 
